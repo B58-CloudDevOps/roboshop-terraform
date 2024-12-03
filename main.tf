@@ -1,4 +1,4 @@
-resource "aws_instance" "name" {
+resource "aws_instance" "main" {
   count                  = length(var.components)
   ami                    = data.aws_ami.main.image_id
   instance_type          = "t3.small"
