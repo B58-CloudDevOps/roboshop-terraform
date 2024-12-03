@@ -12,3 +12,5 @@ variable "components" {
     "dispatch"
   ]
 }
+
+variable "env" {}
