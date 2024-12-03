@@ -3,6 +3,7 @@ variable "components" {
     "frontend",
     "mongodb",
     "catalogue",
+    "user",
     "redis",
     "cart",
     "mysql",
