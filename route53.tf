@@ -1,6 +1,6 @@
 resource "aws_route53_record" "main" {
   count   = length(var.components)
-  zone_id = "Z05544242107X3QLYUZ0E"
+  zone_id = "Z0930427YYY0KH8WD1GU"
   name    = "${var.components[count.index]}-${var.env}"
   type    = "A"
   ttl     = "3"
