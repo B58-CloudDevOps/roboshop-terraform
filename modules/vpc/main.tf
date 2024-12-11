@@ -3,7 +3,7 @@ resource "aws_vpc" "main" {
   cidr_block = var.cidr
 
   tags = {
-    Name = "{var.env}-vpc"
+    Name = "${var.env}-vpc"
   }
 
 }
