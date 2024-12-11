@@ -9,7 +9,7 @@ variable "components" {
     "shipping",
     "rabbitmq",
     "payment",
-    "frontend",
+    "frontend"
   ]
 }
 

@@ -15,6 +15,7 @@ resource "null_resource" "app" {
 
     inline = [
       "sudo pip3.11 install ansible",
+      "pip3.11 install hvac",
       "ansible-pull  -i localhost, -U https://github.com/B58-CloudDevOps/roboshop-ansible.git -e component=${var.components[count.index]} -e env=${var.env} -e vault_token=${var.vault_token} main.yml"
     ]
   }
