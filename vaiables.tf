@@ -1,6 +1,5 @@
 variable "components" {
   default = [
-    "frontend",
     "mongodb",
     "catalogue",
     "user",
@@ -10,7 +9,7 @@ variable "components" {
     "shipping",
     "rabbitmq",
     "payment",
-    "dispatchh"
+    "frontend",
   ]
 }
 
