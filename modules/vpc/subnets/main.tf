@@ -5,6 +5,15 @@ resource "aws_subnet" "main" {
   availability_zone = var.availability_zones[count.index]
 
   tags = {
-    Name = "${var.subnet_name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
+    Name = "${var.name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
+  }
+}
+
+
+resource "aws_route_table" "main" {
+  vpc_id = var.vpc_id
+
+  tags = {
+    Name = "${var.name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
   }
 }

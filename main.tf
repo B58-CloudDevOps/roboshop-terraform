@@ -7,5 +7,5 @@ module "vpc" {
   subnets            = each.value["subnets"]
   env                = var.env
   availability_zones = each.value["availability_zones"]
-  subnet_name        = each.key
+  name               = each.key
 }
