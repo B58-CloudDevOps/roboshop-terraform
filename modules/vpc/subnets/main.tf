@@ -48,19 +48,19 @@ resource "aws_route" "igw_route" {
 
 # Provisions NAT Gateway 
 
-resource "aws_eip" "lb" {
+resource "aws_eip" "ngw" {
   count  = var.name == "public" ? length(var.cidr) : 0
   domain = "vpc"
 }
-resource "aws_nat_gateway" "example" {
-  allocation_id = aws_eip.example.id
-  subnet_id     = aws_subnet.example.id
+resource "aws_nat_gateway" "ngw" {
+  count = var.name == "public" ? length(var.cidr) : 0
+
+  allocation_id = aws_eip.ngw.*.id[count.index]
+  subnet_id     = aws_subnet.main.*.id[count.index]
 
   tags = {
-    Name = "gw NAT"
+    Name = "${var.name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
   }
 
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.example]
+  depends_on = [aws_internet_gateway.main]
 }
