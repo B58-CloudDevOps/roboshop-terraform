@@ -20,8 +20,8 @@ resource "aws_route_table" "main" {
   }
 }
 
-resource "aws_main_route_table_association" "main" {
+resource "aws_route_table_association" "main" {
   count          = length(var.cidr)
-  vpc_id         = var.vpc_id
+  subnet_id      = aws_subnet.main.*.id[count.index]
   route_table_id = aws_route_table.main.*.id[count.index]
 }
