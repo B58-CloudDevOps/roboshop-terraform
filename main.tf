@@ -6,4 +6,6 @@ module "vpc" {
   cidr    = each.value["cidr"]
   subnets = each.value["subnets"]
   env     = var.env
+
+  availability_zones = each.value["availabilty_zones"]
 }
