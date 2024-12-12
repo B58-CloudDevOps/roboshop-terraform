@@ -1,5 +1,5 @@
 variable "cidr" {}
 variable "env" {}
 variable "subnets" {}
-variable "availabilty_zones" {}
+variable "availability_zones" {}
 # variable "name" {}

@@ -11,7 +11,7 @@ module "subnets" {
   source   = "./subnets"
   for_each = var.subnets
 
-  availability_zones = var.availabilty_zones
+  availability_zones = var.availability_zones
   vpc_id             = aws_vpc.main.id
   cidr               = each.value["cidr"]
   env                = var.env

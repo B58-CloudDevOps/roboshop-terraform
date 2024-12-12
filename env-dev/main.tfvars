@@ -1,8 +1,8 @@
 env = "dev"
 vpc = {
   main = {
-    cidr              = "10.0.0.0/16"
-    availabilty_zones = ["us-east-1a", "us-east-1b"]
+    cidr               = "10.0.0.0/16"
+    availability_zones = ["us-east-1a", "us-east-1b"]
     subnets = {
       public = {
         cidr = ["10.0.0.0/24", "10.0.1.0/24"]
