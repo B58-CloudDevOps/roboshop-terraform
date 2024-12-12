@@ -30,7 +30,7 @@ resource "aws_nat_gateway" "ngw" {
   count = length(var.availability_zones)
 
   allocation_id = aws_eip.ngw.*.id[count.index]
-  subnet_id     = module.subnets["public"].subnets[count.index]
+  subnet_id     = module.subnets["public"].subnets.[count.index]
 
   tags = {
     Name = "ngw-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
