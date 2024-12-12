@@ -43,30 +43,3 @@ resource "aws_route" "igw_route" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.igw.*.id[0]
 }
-
-
-# Provisions NAT Gateway 
-
-resource "aws_eip" "ngw" {
-  count  = var.name == "public" ? length(var.cidr) : 0
-  domain = "vpc"
-}
-resource "aws_nat_gateway" "ngw" {
-  count = var.name == "public" ? length(var.cidr) : 0
-
-  allocation_id = aws_eip.ngw.*.id[count.index]
-  subnet_id     = aws_subnet.main.*.id[count.index]
-
-  tags = {
-    Name = "${var.name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
-  }
-  depends_on = [aws_internet_gateway.igw]
-}
-
-# Private Subnet Egress to Internet
-resource "aws_route" "ngw_route" {
-  count                  = var.name != "public" ? length(var.cidr) : 0
-  route_table_id         = aws_route_table.main.*.id[count.index]
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_nat_gateway.ngw.*.id[count.index]
-}
