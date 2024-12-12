@@ -35,3 +35,11 @@ resource "aws_internet_gateway" "igw" {
     Name = "${var.env}-igw"
   }
 }
+
+
+resource "aws_route" "ngw_route" {
+  count                  = var.name != "public" ? length(var.cidr) : 0
+  route_table_id         = aws_route_table.main.*.id[count.index]
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = var.ngw_ids[count.index]
+}
