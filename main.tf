@@ -3,9 +3,8 @@ module "vpc" {
 
   source = "./modules/vpc"
 
-  cidr    = each.value["cidr"]
-  subnets = each.value["subnets"]
-  env     = var.env
-
-  availability_zones = each.value["availabilty_zones"]
+  cidr              = each.value["cidr"]
+  subnets           = each.value["subnets"]
+  env               = var.env
+  availabilty_zones = each.value["availabilty_zones"]
 }
