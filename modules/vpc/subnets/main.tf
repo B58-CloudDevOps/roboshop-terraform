@@ -29,7 +29,7 @@ resource "aws_route_table_association" "main" {
 resource "aws_internet_gateway" "igw" {
   count = var.name == "public" ? 1 : 0
 
-  vpc_id = aws_vpc.main.id
+  vpc_id = var.vpc_id
 
   tags = {
     Name = "${var.env}-igw"
@@ -62,5 +62,5 @@ resource "aws_nat_gateway" "ngw" {
     Name = "${var.name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
   }
 
-  depends_on = [aws_internet_gateway.main]
+  depends_on = [aws_internet_gateway.igw]
 }
