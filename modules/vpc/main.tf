@@ -35,7 +35,6 @@ resource "aws_nat_gateway" "ngw" {
   tags = {
     Name = "ngw-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
   }
-  depends_on = [aws_internet_gateway.igw]
 }
 
 # # Private Subnet Egress to Internet
