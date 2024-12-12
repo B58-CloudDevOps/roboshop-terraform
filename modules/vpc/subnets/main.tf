@@ -5,6 +5,6 @@ resource "aws_subnet" "main" {
   availability_zone = var.availability_zones[count.index]
 
   tags = {
-    Name = "${var.subnet_name}-${var.env}-${var.availability_zones[count.index]}"
+    Name = "${var.subnet_name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
   }
 }
