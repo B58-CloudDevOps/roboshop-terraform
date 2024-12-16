@@ -50,3 +50,10 @@ resource "aws_vpc_peering_connection" "main" {
     Name = "${each.key}-peer"
   }
 }
+
+resource "aws_route" "on_peer_side" {
+  for_each                  = var.peering_vpcs
+  route_table_id            = each.value[route_table_id]
+  destination_cidr_block    = var.cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.main[each.key].id
+}
