@@ -10,3 +10,12 @@ module "vpc" {
   name               = each.key
   peering_vpcs       = each.value["peering_vpcs"]
 }
+
+module "db" {
+  for_each = var.db_servers
+
+  source        = "./modules/ec2"
+  env           = var.env
+  ports         = each.value["ports"]
+  instance_type = each.value[instance_type]
+}

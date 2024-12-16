@@ -34,3 +34,14 @@ vpc = {
     }
   }
 }
+
+db_servers = {
+  rabbitmq = {
+    instance_type = "t3.small"
+    ports = {
+      rabbitmq = {
+        port = 5672
+      }
+    }
+  }
+}
