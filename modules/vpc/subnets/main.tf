@@ -9,14 +9,13 @@ resource "aws_subnet" "main" {
   }
 }
 
-
 resource "aws_route_table" "main" {
   count = length(var.cidr)
 
   vpc_id = var.vpc_id
 
   route {
-    cidr_block                = var.cidr
+    cidr_block                = "172.31.0.0/16" # Tools VPC Route, needs improvement
     vpc_peering_connection_id = var.vpc_peering_ids
   }
 
