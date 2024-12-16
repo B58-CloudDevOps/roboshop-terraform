@@ -14,10 +14,10 @@ resource "aws_route_table" "main" {
 
   vpc_id = var.vpc_id
 
-  # route {
-  #   cidr_block                = "172.31.0.0/16" # Tools VPC Route, needs improvement
-  #   vpc_peering_connection_id = var.vpc_peering_ids
-  # }
+  route {
+    cidr_block                = "172.31.0.0/16" # Tools VPC Route, needs improvement
+    vpc_peering_connection_id = var.vpc_peering_ids
+  }
 
   tags = {
     Name = "${var.name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
@@ -53,11 +53,11 @@ resource "aws_route" "ngw_route" {
   nat_gateway_id         = var.ngw_ids[count.index]
 }
 
-resource "aws_route" "all_route" {
-  count                     = length(var.cidr)
-  route_table_id            = aws_route_table.main.*.id[count.index]
-  destination_cidr_block    = "172.31.0.0/16"
-  vpc_peering_connection_id = var.vpc_peering_ids
-}
+# resource "aws_route" "all_route" {
+#   count                     = length(var.cidr)
+#   route_table_id            = aws_route_table.main.*.id[count.index]
+#   destination_cidr_block    = "172.31.0.0/16"
+#   vpc_peering_connection_id = var.vpc_peering_ids
+# }
 
     
