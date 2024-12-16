@@ -16,7 +16,7 @@ resource "aws_route_table" "main" {
   vpc_id = var.vpc_id
 
   route {
-    cidr_block                = "172.31.0.0/16"
+    cidr_block                = var.cidr
     vpc_peering_connection_id = var.vpc_peering_ids
   }
 
