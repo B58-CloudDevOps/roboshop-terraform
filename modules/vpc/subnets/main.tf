@@ -19,7 +19,7 @@ resource "aws_route_table" "main" {
     Name = "${var.name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
   }
   route {
-    cidr_block                = var.cidr
+    cidr_block                = ["${var.cidr}"]
     vpc_peering_connection_id = var.vpc_peering_ids
   }
 }
