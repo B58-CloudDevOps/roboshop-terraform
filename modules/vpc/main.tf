@@ -16,6 +16,7 @@ module "subnets" {
   cidr               = each.value["cidr"]
   env                = var.env
   ngw_ids            = aws_nat_gateway.ngw.*.id
+  vpc_peering_ids    = aws_vpc_peering_connection.main.id
 }
 
 

@@ -18,6 +18,10 @@ resource "aws_route_table" "main" {
   tags = {
     Name = "${var.name}-${var.env}-${split("-", var.availability_zones[count.index])[2]}"
   }
+  route {
+    cidr_block                = var.cidr
+    vpc_peering_connection_id = var.vpc_peering_ids
+  }
 }
 
 resource "aws_route_table_association" "main" {
@@ -35,7 +39,6 @@ resource "aws_internet_gateway" "igw" {
     Name = "${var.env}-igw"
   }
 }
-
 
 resource "aws_route" "igw_route" {
   count                  = var.name == "public" ? length(var.cidr) : 0
