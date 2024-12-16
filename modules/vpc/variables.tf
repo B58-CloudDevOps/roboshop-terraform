@@ -3,3 +3,4 @@ variable "env" {}
 variable "subnets" {}
 variable "availability_zones" {}
 variable "name" {}
+variable "peering_vpcs" {}

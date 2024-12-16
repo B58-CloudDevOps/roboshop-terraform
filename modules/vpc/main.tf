@@ -38,3 +38,11 @@ resource "aws_nat_gateway" "ngw" {
   }
 }
 
+# Peerting to default vpc 
+resource "aws_vpc_peering_connection" "main" {
+  for_each = var.peering_vpcs
+
+  peer_vpc_id = each.value["id"]
+  vpc_id      = aws_vpc.main.id
+  auto_accept = true
+}
