@@ -1,4 +1,5 @@
-env = "dev"
+env          = "dev"
+def_vpc_cidr = "172.31.0.0/16"
 vpc = {
   main = {
     cidr               = "10.0.0.0/16"
