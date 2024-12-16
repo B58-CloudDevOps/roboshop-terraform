@@ -1,5 +1,5 @@
 env          = "dev"
-def_vpc_cidr = "172.31.0.0/16"
+def_vpc_cidr = "172.31.0.0/16" # Added this additional input to cater maps iterated from vpc
 vpc = {
   main = {
     cidr               = "10.0.0.0/16"
