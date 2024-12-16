@@ -17,6 +17,7 @@ module "subnets" {
   env                = var.env
   ngw_ids            = aws_nat_gateway.ngw.*.id
   vpc_peering_ids    = aws_vpc_peering_connection.main["tools"].id
+  def_vpc_cidr       = var.def_vpc_cidr
 }
 
 # Provisions NAT Gateway 
