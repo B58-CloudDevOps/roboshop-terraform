@@ -1,5 +1,7 @@
 variable "vpc_id" {}
-variable "cidr" {}
+variable "cidr" {
+  default = "172.31.0.0/16"
+}
 variable "env" {}
 variable "availability_zones" {}
 variable "name" {}
