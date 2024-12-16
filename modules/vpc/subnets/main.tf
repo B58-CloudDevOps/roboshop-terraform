@@ -54,3 +54,7 @@ resource "aws_route" "all_route" {
   destination_cidr_block    = var.def_vpc_cidr
   vpc_peering_connection_id = var.vpc_peering_ids
 }
+
+output "default_vpc_cidr_0" {
+  value = var.def_vpc_cidr
+}
