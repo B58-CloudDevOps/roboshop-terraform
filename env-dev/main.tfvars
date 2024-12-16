@@ -31,7 +31,7 @@ vpc = {
         cidr           = "172.31.0.0/16"
         route_table_id = "rtb-0623fe36206b96d65"
       }
-    }
+  
 
   }
 }
