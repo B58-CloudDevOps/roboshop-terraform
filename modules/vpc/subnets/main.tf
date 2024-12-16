@@ -56,8 +56,10 @@ resource "aws_route" "ngw_route" {
 resource "aws_route" "all_route" {
   count                     = length(var.cidr)
   route_table_id            = aws_route_table.main.*.id[count.index]
-  destination_cidr_block    = "172.31.0.0/16"
+  destination_cidr_block    = "172.31.0.0/16" # Default VPC Cidr 
   vpc_peering_connection_id = var.vpc_peering_ids
 }
 
-    
+output "cidr" {
+  value = var.cidr
+}
