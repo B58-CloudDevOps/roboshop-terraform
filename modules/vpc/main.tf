@@ -55,3 +55,7 @@ resource "aws_route" "on_peer_side" {
   destination_cidr_block    = var.cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.main[each.key].id
 }
+
+output "def_vpc_cidr" {
+  value = var.def_vpc_cidr
+}
