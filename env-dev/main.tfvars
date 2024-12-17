@@ -46,7 +46,7 @@ db_servers = {
         cidr = ["10.0.4.0/24", "10.0.5.0/24"]
       }
       rabbitmq-new = {
-        port = 5672
+        port = 1223
         cidr = ["10.0.4.0/24"]
       }
     }
