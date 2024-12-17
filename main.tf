@@ -19,7 +19,7 @@ module "db" {
   name          = each.key
   env           = var.env
   ports         = each.value["ports"]
-  instance_type = each.value[instance_type]
+  instance_type = each.value["instance_type"]
 
   vpc_id = module.vpc["main"].subnets["db"].subnets
 }
