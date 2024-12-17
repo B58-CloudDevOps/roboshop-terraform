@@ -74,43 +74,7 @@ app_servers = {
     ports = {
       catalogue = {
         port = 8080
-        cidr = ["10.0.2.0/24", "10.0.3.0/24"]
-      }
-    }
-  }
-  user = {
-    instance_type = "t3.small"
-    ports = {
-      user = {
-        port = 8080
-        cidr = ["10.0.2.0/24", "10.0.3.0/24"]
-      }
-    }
-  }
-  cart = {
-    instance_type = "t3.small"
-    ports = {
-      cart = {
-        port = 8080
-        cidr = ["10.0.2.0/24", "10.0.3.0/24"]
-      }
-    }
-  }
-  shipping = {
-    instance_type = "t3.small"
-    shipping = {
-      catalogue = {
-        port = 8080
-        cidr = ["10.0.2.0/24", "10.0.3.0/24"]
-      }
-    }
-  }
-  payment = {
-    instance_type = "t3.small"
-    ports = {
-      payment = {
-        port = 8080
-        cidr = ["10.0.2.0/24", "10.0.3.0/24"]
+        cidr = ["10.0.1.0/24", "10.0.2.0/24"]
       }
     }
   }
@@ -122,7 +86,7 @@ web_servers = {
     instance_type = "t3.small"
     ports = {
       frontend = {
-        port = 8080
+        port = 80
         cidr = ["10.0.0.0/24", "10.0.1.0/24"]
       }
     }
