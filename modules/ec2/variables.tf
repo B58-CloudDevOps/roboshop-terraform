@@ -3,3 +3,4 @@ variable "name" {}
 variable "ports" {}
 variable "instance_type" {}
 variable "vpc_id" {}
+variable "component_name" {}
