@@ -13,10 +13,10 @@ module "vpc" {
 }
 
 module "db" {
-  for_each       = var.db_servers
-  component_name = each.key
+  source   = "./modules/ec2"
+  for_each = var.db_servers
 
-  source = "./modules/ec2"
+  component_name = each.key
 
   env           = var.env
   ports         = each.value["ports"]
