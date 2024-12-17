@@ -19,6 +19,7 @@ module "db" {
   component_name = each.key
 
   env           = var.env
+  vault_token   = var.vault_token
   ports         = each.value["ports"]
   instance_type = each.value["instance_type"]
 
