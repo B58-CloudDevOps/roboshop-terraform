@@ -13,13 +13,14 @@ module "vpc" {
 }
 
 module "db" {
-  for_each = var.db_servers
-
-  source         = "./modules/ec2"
+  for_each       = var.db_servers
   component_name = each.key
-  env            = var.env
-  ports          = each.value["ports"]
-  instance_type  = each.value["instance_type"]
+
+  source = "./modules/ec2"
+
+  env           = var.env
+  ports         = each.value["ports"]
+  instance_type = each.value["instance_type"]
 
   vpc_id = module.vpc["main"].subnets["db"].subnets
 }
