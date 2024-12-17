@@ -5,3 +5,4 @@ variable "vpc_id" {}
 variable "component_name" {}
 variable "bastion_host" {}
 variable "subnet_ids" {}
+variable "zone_id" {}
