@@ -1,5 +1,6 @@
 env          = "dev"
 def_vpc_cidr = "172.31.0.0/16" # Added this additional input to cater maps iterated from vpc
+bastion_host = ["172.31.43.201/32"]
 vpc = {
   main = {
     cidr               = "10.0.0.0/16"
@@ -42,6 +43,7 @@ db_servers = {
     ports = {
       rabbitmq = {
         port = 5672
+        cidr = ["10.0.4.0/24", "10.0.5.0/24"]
       }
     }
   }

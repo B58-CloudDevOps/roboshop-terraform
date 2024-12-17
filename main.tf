@@ -22,5 +22,6 @@ module "db" {
   ports         = each.value["ports"]
   instance_type = each.value["instance_type"]
 
-  vpc_id = module.vpc["main"].vpc_id
+  vpc_id       = module.vpc["main"].vpc_id
+  bastion_host = var.bastion_host
 }
