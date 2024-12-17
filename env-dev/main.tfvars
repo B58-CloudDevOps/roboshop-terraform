@@ -115,3 +115,16 @@ app_servers = {
     }
   }
 }
+
+
+web_servers = {
+  frontend = {
+    instance_type = "t3.small"
+    ports = {
+      frontend = {
+        port = 8080
+        cidr = ["10.0.0.0/24", "10.0.1.0/24"]
+      }
+    }
+  }
+}

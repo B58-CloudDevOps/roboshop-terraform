@@ -33,22 +33,41 @@ module "db" {
 }
 
 
-module "app" {
-  depends_on = [module.db]
+# module "app" {
+#   depends_on = [module.db]
 
-  source   = "./modules/ec2"
-  for_each = var.db_servers
+#   source   = "./modules/ec2"
+#   for_each = var.db_servers
 
-  component_name = each.key
+#   component_name = each.key
 
-  env           = var.env
-  vault_token   = var.vault_token
-  ports         = each.value["ports"]
-  instance_type = each.value["instance_type"]
+#   env           = var.env
+#   vault_token   = var.vault_token
+#   ports         = each.value["ports"]
+#   instance_type = each.value["instance_type"]
 
-  vpc_id       = module.vpc["main"].vpc_id
-  zone_id      = var.zone_id
-  bastion_host = var.bastion_host
-  subnet_ids   = module.vpc["main"].subnets["db"].subnets
-}
+#   vpc_id       = module.vpc["main"].vpc_id
+#   zone_id      = var.zone_id
+#   bastion_host = var.bastion_host
+#   subnet_ids   = module.vpc["main"].subnets["app"].subnets
+# }
 
+
+# module "web" {
+#   depends_on = [module.app]
+
+#   source   = "./modules/ec2"
+#   for_each = var.db_servers
+
+#   component_name = each.key
+
+#   env           = var.env
+#   vault_token   = var.vault_token
+#   ports         = each.value["ports"]
+#   instance_type = each.value["instance_type"]
+
+#   vpc_id       = module.vpc["main"].vpc_id
+#   zone_id      = var.zone_id
+#   bastion_host = var.bastion_host
+#   subnet_ids   = module.vpc["main"].subnets["web"].subnets
+# }
