@@ -48,4 +48,22 @@ db_servers = {
       }
     }
   }
+  mongodb = {
+    instance_type = "t3.small"
+    ports = {
+      mongodb = {
+        port = 27017
+        cidr = ["10.0.4.0/24", "10.0.5.0/24"]
+      }
+    }
+  }
+  mysql = {
+    instance_type = "t3.small"
+    ports = {
+      mysql = {
+        port = 3306
+        cidr = ["10.0.4.0/24", "10.0.5.0/24"]
+      }
+    }
+  }
 }
