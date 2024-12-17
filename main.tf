@@ -53,7 +53,7 @@ module "db" {
 
 
 module "web" {
-  depends_on = [module.app]
+  # depends_on = [module.app]
 
   source   = "./modules/ec2"
   for_each = var.web_servers
