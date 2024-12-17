@@ -12,14 +12,14 @@ module "vpc" {
   def_vpc_cidr       = var.def_vpc_cidr
 }
 
-module "db" {
-  for_each = var.db_servers
+# module "db" {
+#   for_each = var.db_servers
 
-  source        = "./modules/ec2"
-  name          = each.key
-  env           = var.env
-  ports         = each.value["ports"]
-  instance_type = each.value["instance_type"]
+#   source        = "./modules/ec2"
+#   name          = each.key
+#   env           = var.env
+#   ports         = each.value["ports"]
+#   instance_type = each.value["instance_type"]
 
-  vpc_id = module.vpc["main"].subnets["db"].subnets
-}
+#   vpc_id = module.vpc["main"].subnets["db"].subnets
+# }
