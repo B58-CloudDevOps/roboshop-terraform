@@ -1,8 +1,8 @@
-env          = "dev"
-def_vpc_cidr = "172.31.0.0/16" # Added this additional input to cater maps iterated from vpc
-bastion_host = ["172.31.43.201/32"]
-zone_id      = "Z0930427YYY0KH8WD1GU"
-def_vpc_id   = "vpc-0031cc952da0c7bfc"
+env            = "dev"
+def_vpc_cidr   = "172.31.0.0/16" # Added this additional input to cater maps iterated from vpc
+bastion_host   = ["172.31.43.201/32"]
+hosted_zone_id = "Z0520454XBSCKDOCPTCY"
+def_vpc_id     = "vpc-0031cc952da0c7bfc"
 vpc = {
   main = {
     cidr               = "10.0.0.0/16"
