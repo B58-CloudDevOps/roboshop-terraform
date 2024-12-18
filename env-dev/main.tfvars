@@ -67,6 +67,15 @@ db_servers = {
       }
     }
   }
+  redis = {
+    instance_type = "t3.small"
+    ports = {
+      redis = {
+        port = 6379
+        cidr = ["10.0.4.0/24", "10.0.5.0/24"]
+      }
+    }
+  }
 }
 
 app_servers = {
