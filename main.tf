@@ -10,7 +10,6 @@ module "vpc" {
   name               = each.key
   peering_vpcs       = each.value["peering_vpcs"]
   def_vpc_cidr       = var.def_vpc_cidr
-  hosted_zone_id     = var.hosted_zone_id
   def_vpc_id         = var.def_vpc_id
 }
 
