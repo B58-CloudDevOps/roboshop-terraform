@@ -10,7 +10,6 @@ module "vpc" {
   name               = each.key
   peering_vpcs       = each.value["peering_vpcs"]
   def_vpc_cidr       = var.def_vpc_cidr
-
 }
 
 module "db" {
