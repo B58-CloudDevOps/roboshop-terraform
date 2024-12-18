@@ -7,3 +7,4 @@ variable "bastion_host" {}
 variable "subnet_ids" {}
 variable "zone_id" {}
 variable "vault_token" {}
+variable "hosted_zone_id" {}
