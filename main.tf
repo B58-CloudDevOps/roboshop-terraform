@@ -11,6 +11,7 @@ module "vpc" {
   peering_vpcs       = each.value["peering_vpcs"]
   def_vpc_cidr       = var.def_vpc_cidr
   zone_id            = var.zone_id
+  def_vpc_id         = var.def_vpc_id
 }
 
 module "db" {

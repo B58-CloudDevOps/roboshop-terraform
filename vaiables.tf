@@ -7,3 +7,4 @@ variable "web_servers" {}
 variable "def_vpc_cidr" {}
 variable "bastion_host" {}
 variable "zone_id" {}
+variable "def_vpc_id" {}
