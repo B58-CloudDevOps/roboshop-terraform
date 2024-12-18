@@ -10,7 +10,7 @@ module "vpc" {
   name               = each.key
   peering_vpcs       = each.value["peering_vpcs"]
   def_vpc_cidr       = var.def_vpc_cidr
-  zone_id            = var.zone_id
+  hosted_zone_id     = var.hosted_zone_id
   def_vpc_id         = var.def_vpc_id
 }
 
@@ -27,10 +27,10 @@ module "db" {
   ports         = each.value["ports"]
   instance_type = each.value["instance_type"]
 
-  vpc_id       = module.vpc["main"].vpc_id
-  zone_id      = var.zone_id
-  bastion_host = var.bastion_host
-  subnet_ids   = module.vpc["main"].subnets["db"].subnets
+  vpc_id         = module.vpc["main"].vpc_id
+  hosted_zone_id = var.hosted_zone_id
+  bastion_host   = var.bastion_host
+  subnet_ids     = module.vpc["main"].subnets["db"].subnets
 }
 
 module "app" {
@@ -67,8 +67,8 @@ module "web" {
   ports         = each.value["ports"]
   instance_type = each.value["instance_type"]
 
-  vpc_id       = module.vpc["main"].vpc_id
-  zone_id      = var.zone_id
-  bastion_host = var.bastion_host
-  subnet_ids   = module.vpc["main"].subnets["web"].subnets
+  vpc_id         = module.vpc["main"].vpc_id
+  hosted_zone_id = var.hosted_zone_id
+  bastion_host   = var.bastion_host
+  subnet_ids     = module.vpc["main"].subnets["web"].subnets
 }

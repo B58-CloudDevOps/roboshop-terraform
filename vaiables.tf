@@ -6,5 +6,5 @@ variable "app_servers" {}
 variable "web_servers" {}
 variable "def_vpc_cidr" {}
 variable "bastion_host" {}
-variable "zone_id" {}
+variable "hosted_zone_id" {}
 variable "def_vpc_id" {}
