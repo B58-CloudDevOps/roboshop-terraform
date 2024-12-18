@@ -54,18 +54,16 @@ module "app" {
 
 
 module "web" {
+  source     = "./modules/ec2"
   depends_on = [module.app]
 
-  source   = "./modules/ec2"
   for_each = var.web_servers
 
   component_name = each.key
-
-  env           = var.env
-  vault_token   = var.vault_token
-  ports         = each.value["ports"]
-  instance_type = each.value["instance_type"]
-
+  env            = var.env
+  vault_token    = var.vault_token
+  ports          = each.value["ports"]
+  instance_type  = each.value["instance_type"]
   vpc_id         = module.vpc["main"].vpc_id
   hosted_zone_id = module.vpc["main"].hosted_zone_id
   bastion_host   = var.bastion_host
