@@ -29,6 +29,7 @@ module "db" {
   hosted_zone_id = var.hosted_zone_id
   bastion_host   = var.bastion_host
   subnet_ids     = module.vpc["main"].subnets["db"].subnets
+  vpc_id         = module.vpc["main"].vpc_id
 }
 
 module "app" {
