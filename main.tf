@@ -46,7 +46,7 @@ module "app" {
   instance_type = each.value["instance_type"]
   ports         = each.value["ports"]
 
-  # vpc_id       = module.vpc["main"].vpc_id
+  vpc_id         = module.vpc["main"].vpc_id
   hosted_zone_id = module.vpc["main"].hosted_zone_id
   bastion_host   = var.bastion_host
   subnet_ids     = module.vpc["main"].subnets["app"].subnets
