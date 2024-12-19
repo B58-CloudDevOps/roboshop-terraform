@@ -71,6 +71,7 @@ module "web" {
 
 module "load-balancers" {
   for_each           = var.load_balancers
+  depends_on         = [module.web]
   source             = "./modules/load-balancers"
   component_name     = each.key
   load_balancer_type = each.value["load_balancer_type"]
