@@ -1,8 +1,8 @@
 resource "null_resource" "app" {
   depends_on = [aws_route53_record.main]
-  triggers = {
-    always = timestamp()
-  }
+  # triggers = {
+  #   always = timestamp()
+  # }
   provisioner "remote-exec" { # This let's the execution to happen on the remote node
     connection {
       host     = aws_instance.main.private_ip
