@@ -1,5 +1,9 @@
 vault_token := $(shell echo $$vault_token)
 
+dev-plan:
+	terraform init -backend-config=env-dev/state.tfvars
+	terraform plan  -var-file=env-dev/main.tfvars -var vault_token=$$vault_token -out dev.tfplan
+
 dev-apply:
 	terraform init -backend-config=env-dev/state.tfvars
 	terraform apply -auto-approve -var-file=env-dev/main.tfvars -var vault_token=$$vault_token
