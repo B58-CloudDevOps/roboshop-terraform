@@ -77,4 +77,5 @@ module "load-balancers" {
   type               = each.value["type"]
   env                = var.env
   vpc_id             = module.vpc["main"].vpc_id
+  subnet_ids         = module.vpc["main"].subnets["web"].subnets
 }
