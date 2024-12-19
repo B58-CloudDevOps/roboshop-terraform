@@ -140,7 +140,7 @@ web_servers = {
 
 
 load_balancers = {
-  frontend = {
+  frontend-lb = {
     internal           = false
     load_balancer_type = "application"
   }
