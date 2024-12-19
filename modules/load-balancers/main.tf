@@ -1,13 +1,13 @@
 #  Provisions ALB
-resource "aws_lb" "test" {
-  name               = "test-lb-tf"
-  internal           = false
-  load_balancer_type = "application"
+resource "aws_lb" "main" {
+  name               = "${var.component_name}-${var.env}-lb"
+  internal           = var.internal
+  load_balancer_type = var.subnet_ids
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnet_ids
 
   tags = {
-    Environment = "${var.component_name}-${var.env}-lb"
+    Name = "${var.component_name}-${var.env}-lb"
   }
 }
 
