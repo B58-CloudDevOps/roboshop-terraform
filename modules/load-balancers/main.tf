@@ -1,3 +1,4 @@
+#  Provisions ALB
 resource "aws_lb" "test" {
   name               = "test-lb-tf"
   internal           = false
@@ -9,3 +10,4 @@ resource "aws_lb" "test" {
     Environment = "${var.component_name}-${var.env}-lb"
   }
 }
+

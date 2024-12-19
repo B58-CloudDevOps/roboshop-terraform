@@ -8,3 +8,4 @@ variable "load_balancers" {}
 variable "def_vpc_cidr" {}
 variable "bastion_host" {}
 variable "hosted_zone_id" {}
+variable "instance_id" {}
