@@ -4,6 +4,7 @@ variable "vault_token" {}
 variable "db_servers" {}
 variable "app_servers" {}
 variable "web_servers" {}
+variable "load_balancers" {}
 variable "def_vpc_cidr" {}
 variable "bastion_host" {}
 variable "hosted_zone_id" {}

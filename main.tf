@@ -68,3 +68,13 @@ module "web" {
   bastion_host   = var.bastion_host
   subnet_ids     = module.vpc["main"].subnets["web"].subnets
 }
+
+module "load-balancers" {
+  for_each       = var.load_balancers
+  source         = "./modules/load-balancers"
+  component_name = each.key
+  scope          = each.value["scope"]
+  type           = each.value["type"]
+  env            = var.env
+  vpc_id         = module.vpc["main"].vpc_id
+}
