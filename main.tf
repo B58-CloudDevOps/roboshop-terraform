@@ -70,11 +70,11 @@ module "web" {
 }
 
 module "load-balancers" {
-  for_each       = var.load_balancers
-  source         = "./modules/load-balancers"
-  component_name = each.key
-  scope          = each.value["scope"]
-  type           = each.value["type"]
-  env            = var.env
-  vpc_id         = module.vpc["main"].vpc_id
+  for_each           = var.load_balancers
+  source             = "./modules/load-balancers"
+  component_name     = each.key
+  load_balancer_type = each.value["load_balancer_type"]
+  type               = each.value["type"]
+  env                = var.env
+  vpc_id             = module.vpc["main"].vpc_id
 }
