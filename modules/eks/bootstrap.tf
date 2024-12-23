@@ -14,9 +14,7 @@ EOF
 
 
 resource "null_resource" "externalDns" {
-  triggers = {
-    always = timestamp()
-  }
+
   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main]
 
   provisioner "local-exec" {
