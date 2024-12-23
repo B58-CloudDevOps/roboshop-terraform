@@ -7,7 +7,7 @@ resource "null_resource" "nginx_ingress" {
     command = <<EOF
 
 aws eks update-kubeconfig --name "${var.env}-eks"
-helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace kube-system
+helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace kube-system -f ${path.module}/ingressValues.yaml
 EOF
   }
 }
