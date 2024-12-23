@@ -66,15 +66,12 @@ resource "aws_iam_role" "external_dns_role" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Federated" : "arn:aws:iam::${data.aws_caller_identity.main.account_id}:oidc-provider/${local.OIDC_PROVIDER}"
+          "Service" : "pods.eks.amazonaws.com"
         },
-        "Action" : "sts:AssumeRoleWithWebIdentity",
-        "Condition" : {
-          "StringEquals" : {
-            "${local.OIDC_PROVIDER}:sub" : "system:serviceaccount:kube-system:external-dns",
-            "${local.OIDC_PROVIDER}:aud" : "sts.amazonaws.com"
-          }
-        }
+        "Action" : [
+          "sts:AssumeRole",
+          "sts:TagSession"
+        ]
       }
     ]
   })
