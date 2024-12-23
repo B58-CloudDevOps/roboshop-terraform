@@ -1,5 +1,5 @@
 # Deploys Nginx Ingress Controller In kube-system namespace
-resource "null_resource" "nginx_ingress" {
+resource "null_resource" "nginxIngress" {
   triggers = {
     always = timestamp()
   }
