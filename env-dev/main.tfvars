@@ -81,6 +81,12 @@ db_servers = {
 eks = {
   main = {
     subnet_ref          = "app"
-    eks_cluster_version = "1.30"
+    eks_cluster_version = "1.30" # 1.31 is latest
+    node_groups = {
+      first = {
+        min_nodes = 1
+        max_nodes = 3
+      }
+    }
   }
 } 

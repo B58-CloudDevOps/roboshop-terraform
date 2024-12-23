@@ -1,19 +1,16 @@
-data "aws_iam_policy_document" "eks_assume_role" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      type        = "Service"
-      identifiers = ["eks.amazonaws.com"]
-    }
-
-    actions = ["sts:AssumeRole"]
-  }
-}
-
+# Cluster IAM Roles
 resource "aws_iam_role" "eks_role" {
   name               = "${var.component_name}-${var.env}-eks-role"
-  assume_role_policy = data.aws_iam_policy_document.eks_assume_role.json
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "ek2.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "eks_role_AmazonEKSClusterPolicy" {
@@ -23,4 +20,36 @@ resource "aws_iam_role_policy_attachment" "eks_role_AmazonEKSClusterPolicy" {
 resource "aws_iam_role_policy_attachment" "eks_role_AmazonEKSVPCResourceController" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
   role       = aws_iam_role.eks_role.name
+}
+
+
+# Node Group IAM Roles
+resource "aws_iam_role" "node_role" {
+  name = "${var.component_name}-${var.env}-eks-node-role"
+
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "ec2.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "node-AmazonEKSWorkerNodePolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  role       = aws_iam_role.node_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "node-AmazonEKS_CNI_Policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  role       = aws_iam_role.node_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "node-AmazonEC2ContainerRegistryReadOnly" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.node_role.name
 }

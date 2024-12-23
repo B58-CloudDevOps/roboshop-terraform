@@ -38,4 +38,5 @@ module "eks" {
   env                 = var.env
   subnet_ids          = module.vpc["main"].subnets[each.value["subnet_ref"]].subnets
   eks_cluster_version = each.value["eks_cluster_version"]
+  node_groups         = each.value["node_groups"]
 }
