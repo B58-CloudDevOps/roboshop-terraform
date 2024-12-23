@@ -37,6 +37,5 @@ module "eks" {
   component_name      = each.key
   env                 = var.env
   subnet_ids          = module.vpc["main"].subnets[each.value["subnet_ref"]].subnets
-  version             = each.value["eks_cluster_version"]
   eks_cluster_version = each.value["eks_cluster_version"]
 }
