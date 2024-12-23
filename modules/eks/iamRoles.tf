@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "eks_assume_role" {
   }
 }
 
-resource "aws_iam_role" "eks_role " {
+resource "aws_iam_role" "eks_role" {
   name               = "${var.component_name}-${var.env}-eks-role"
   assume_role_policy = data.aws_iam_policy_document.eks_assume_role.json
 }
