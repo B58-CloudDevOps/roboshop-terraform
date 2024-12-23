@@ -92,7 +92,8 @@ eks = {
     }
     addons = {
       kube-proxy = {
-        addon_version = null
+        addon_version               = null
+        resolve_conflicts_on_update = "OVERWRITE"
       }
     }
   }
