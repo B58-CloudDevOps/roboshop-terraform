@@ -1,6 +1,6 @@
 # Cluster IAM Roles
 resource "aws_iam_role" "eks_role" {
-  name               = "${var.component_name}-${var.env}-eks-role"
+  name = "${var.component_name}-${var.env}-eks-role"
   assume_role_policy = jsonencode({
     Statement = [{
       Action = "sts:AssumeRole"
