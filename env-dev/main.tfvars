@@ -90,5 +90,10 @@ eks = {
         instance_types = ["t3.medium"]
       }
     }
+    addons = {
+      kube-proxy = {
+        addon_version = null
+      }
+    }
   }
 } 
