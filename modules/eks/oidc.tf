@@ -8,5 +8,5 @@ resource "aws_iam_openid_connect_provider" "main" {
 }
 
 data "external" "oidc_thumbprint" {
-  program = ["kubergrunt", "eks", "oidc-thumbprint", "--issuer-url", aws_eks_cluster.main.identity.oidc[0].issuer]
+  program = ["kubergrunt", "eks", "oidc-thumbprint", "--issuer-url", aws_eks_cluster.main.identity[0].oidc[0].issuer]
 }
