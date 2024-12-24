@@ -77,4 +77,33 @@ resource "aws_iam_role" "external_dns_role" {
       }
     ]
   })
+  inline_policy {
+    name = "route53_externaDns"
+
+    policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "route53:ChangeResourceRecordSets"
+          ],
+          "Resource" : [
+            "arn:aws:route53:::hostedzone/*"
+          ]
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "route53:ListHostedZones",
+            "route53:ListResourceRecordSets",
+            "route53:ListTagsForResource"
+          ],
+          "Resource" : [
+            "*"
+          ]
+        }
+      ]
+    })
+  }
 }
