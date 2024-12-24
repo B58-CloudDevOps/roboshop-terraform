@@ -14,9 +14,7 @@ EOF
 
 # Deploys External-DNS In kube-system namespace ; This will ensure needed DNS Records would automatically
 resource "null_resource" "externalDns" {
-  triggers = {
-    always = timestamp()
-  }
+
   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress]
 
   provisioner "local-exec" {
@@ -35,4 +33,23 @@ resource "aws_eks_pod_identity_association" "external_dns" {
   namespace       = "kube-system"
   service_account = "external-dns"
   role_arn        = aws_iam_role.external_dns_role.arn
+}
+
+# Deploys Prometheus & Grafana Stack
+
+
+resource "null_resource" "prometheus_grafana_stack" {
+  triggers = {
+    always = timestamp()
+  }
+  depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
+
+  provisioner "local-exec" {
+    command = <<EOF
+
+aws eks update-kubeconfig --name "${var.env}-eks"
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install prom-stack prometheus-community/kube-prometheus-stack
+EOF
+  }
 }

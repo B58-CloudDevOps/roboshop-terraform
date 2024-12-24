@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: b58public
+  name: expenses
   namespace: kube-system
 spec:
   ingressClassName: nginx
   rules:
-  - host: b58public.cloudapps.today # we need to create a DNS Record for the ingress lb as CNAME
+  - host: expenses.cloudapps.today # we need to create a DNS Record for the ingress lb as CNAME
     http:
       paths:
       - path: /
@@ -16,39 +16,3 @@ spec:
             name: ingress-nginx-controller
             port:
               number: 80
-
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: prometheus
-spec:
-  rules:
-  - host: prometheus.cloudapps.today # we need to create a DNS Record for the ingress lb as CNAME
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: prometheus
-            port:
-              number: 8080
---- 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: testers
-spec:
-  rules:
-  - host: testers.cloudapps.today # we need to create a DNS Record for the ingress lb as CNAME
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: testers
-            port:
-              number: 8080
