@@ -64,7 +64,7 @@ resource "null_resource" "hpa_metrics_server" {
     command = <<EOF
 
 aws eks update-kubeconfig --name "${var.env}-eks"
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml --namespace kube-system
 EOF
   }
 }
