@@ -55,7 +55,7 @@ resource "aws_iam_role_policy_attachment" "node-AmazonEC2ContainerRegistryReadOn
 }
 
 
-# IAM Role + Trust for External-DNS 
+# IAM Role + Trust for External-DNS using Pod Identity Association
 resource "aws_iam_role" "external_dns_role" {
   name = "${var.component_name}-${var.env}-eks-external-dns-role"
 
@@ -65,15 +65,14 @@ resource "aws_iam_role" "external_dns_role" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Federated" : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${local.OIDC_PROVIDER}"
+          "Service" : [
+            "pods.eks.amazonaws.com"
+          ]
         },
-        "Action" : "sts:AssumeRoleWithWebIdentity",
-        "Condition" : {
-          "StringEquals" : {
-            "${local.OIDC_PROVIDER}:sub" : "system:serviceaccount:kube-system:external-dns",
-            "${local.OIDC_PROVIDER}:aud" : "sts.amazonaws.com"
-          }
-        }
+        "Action" : [
+          "sts:AssumeRole",
+          "sts:TagSession"
+        ]
       }
     ]
   })
