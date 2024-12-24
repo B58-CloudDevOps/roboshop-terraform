@@ -11,7 +11,6 @@ EOF
   }
 }
 
-
 # Deploys External-DNS In kube-system namespace ; This will ensure needed DNS Records would automatically
 resource "null_resource" "externalDns" {
 
@@ -36,8 +35,6 @@ resource "aws_eks_pod_identity_association" "external_dns" {
 }
 
 # Deploys Prometheus & Grafana Stack
-
-
 resource "null_resource" "prometheus_grafana_stack" {
   triggers = {
     always = timestamp()
@@ -49,13 +46,11 @@ resource "null_resource" "prometheus_grafana_stack" {
 
 aws eks update-kubeconfig --name "${var.env}-eks"
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm upgrade --install prom-stack prometheus-community/kube-prometheus-stack --namespace kube-system -f ${path.module}/conf/promStackValues.yaml || true
-kubectl apply -f "ingress-${var.env}.yaml"
+helm upgrade --install prom-stack prometheus-community/kube-prometheus-stack --namespace kube-system -f ${path.module}/conf/promStackValues.yaml
+kubectl apply -f ingress-dev.yaml
 EOF
   }
 }
-
-
 
 resource "null_resource" "hpa_metrics_server" {
   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
