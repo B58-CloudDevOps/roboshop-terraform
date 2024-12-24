@@ -36,9 +36,7 @@ resource "aws_eks_pod_identity_association" "external_dns" {
 
 # Deploys Prometheus & Grafana Stack
 resource "null_resource" "prometheus_grafana_stack" {
-  triggers = {
-    always = timestamp()
-  }
+
   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
 
   provisioner "local-exec" {
