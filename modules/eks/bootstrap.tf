@@ -49,7 +49,7 @@ resource "null_resource" "prometheus_grafana_stack" {
 
 aws eks update-kubeconfig --name "${var.env}-eks"
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install prom-stack prometheus-community/kube-prometheus-stack --namespace kube-system
+helm install prom-stack prometheus-community/kube-prometheus-stack --namespace kube-system -f ${path.module}/conf/promStackValues.yaml
 EOF
   }
 }
