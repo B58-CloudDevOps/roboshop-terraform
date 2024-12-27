@@ -61,3 +61,17 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 EOF
   }
 }
+
+resource "null_resource" "fluentd" {
+  depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
+
+  provisioner "local-exec" {
+    command = <<EOF
+
+aws eks update-kubeconfig --name "${var.env}-eks"
+helm repo add fluent https://fluent.github.io/helm-charts 
+helm upgrade install fluentd fluent/fluentd --namespace kube-system -f ${path.module}/conf/fluentd.yaml
+
+EOF
+  }
+}
