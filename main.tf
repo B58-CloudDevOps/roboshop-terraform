@@ -50,5 +50,8 @@ module "opensearch" {
   env            = var.env
   instance_type  = each.value["instance_type"]
   engine_version = each.value["engine_version"]
+}
 
+output "op_endpoiut" {
+  value = module.opensearch["main"].opensearch_endpoint
 }
