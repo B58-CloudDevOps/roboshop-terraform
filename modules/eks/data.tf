@@ -14,6 +14,7 @@ data "template_file" "fluend_values" {
     DOMAIN_URL      = var.opensearch_url
     DOMAIN_USERNAME = data.vault_generic_secret.opensearch.data["MASTER_USERNAME"]
     DOMAIN_PASSWORD = data.vault_generic_secret.opensearch.data["MASTER_PASSWORD"]
+    env             = var.env
 
   }
 }
