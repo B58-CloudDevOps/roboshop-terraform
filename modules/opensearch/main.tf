@@ -31,18 +31,19 @@ resource "aws_opensearch_domain" "main" {
     enabled = true
   }
 
-  access_policies = jsondecode({
-    Statement = [
-      {
-        Action = "es:*"
-        Effect = "Allow"
-        Principal = {
-          AWS = "*"
-        }
-        Resource = "arn:aws:es:us-east-1:${data.aws_caller_identity.current.account_id}:domain/${var.component_name}-${var.env}/*"
-      },
-    ]
-    Version = "2012-10-17"
+  access_policies = jsondecode(
+    {
+      Statement = [
+        {
+          Action = "es:*"
+          Effect = "Allow"
+          Principal = {
+            AWS = "*"
+          }
+          Resource = "arn:aws:es:us-east-1:${data.aws_caller_identity.current.account_id}:domain/${var.component_name}-${var.env}/*"
+        },
+      ]
+      Version = "2012-10-17"
   })
 
   tags = {
