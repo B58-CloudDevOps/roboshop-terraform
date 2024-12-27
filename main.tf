@@ -42,11 +42,11 @@ module "eks" {
   addons              = each.value["addons"]
 }
 
-# module "opensearch" {
-#   source         = "./modules/opensearch"
-#   for_each       = var.opensearch
-#   component_name = each.key
-#   env            = var.env
-#   instance_type  = each.value["instance_type"]
-#   engine_version = each.value["engine_version"]
-# }
+module "opensearch" {
+  source         = "./modules/opensearch"
+  for_each       = var.opensearch
+  component_name = each.key
+  env            = var.env
+  instance_type  = each.value["instance_type"]
+  engine_version = each.value["engine_version"]
+}
