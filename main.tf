@@ -40,7 +40,7 @@ module "eks" {
   eks_cluster_version = each.value["eks_cluster_version"]
   node_groups         = each.value["node_groups"]
   addons              = each.value["addons"]
-  opensearch_endpoint = module.opensearch["main"].opensearch_endpoint
+  opensearch_endpoint =   
 }
 
 module "opensearch" {
