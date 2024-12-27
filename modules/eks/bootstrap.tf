@@ -70,7 +70,7 @@ resource "null_resource" "fluentd" {
 
 aws eks update-kubeconfig --name "${var.env}-eks"
 helm repo add fluent https://fluent.github.io/helm-charts 
-helm upgrade install fluentd fluent/fluentd --namespace kube-system -f ${path.module}/conf/fluentd.yaml
+helm upgrade --install fluentd fluent/fluentd --namespace kube-system -f ${path.module}/conf/fluentd.yaml
 EOF
   }
 }
