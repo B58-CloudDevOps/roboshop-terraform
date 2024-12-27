@@ -76,3 +76,22 @@ helm upgrade --install fluentd fluent/fluentd --namespace kube-system -f ${path.
 EOF
   }
 }
+
+# FluentD Helm Chart
+resource "helm_release" "fluentd" {
+  depends_on = [
+    aws_eks_cluster.main,
+    aws_eks_node_group.main,
+    null_resource.nginxIngress,
+    null_resource.externalDns
+  ]
+
+  name       = "fluentd"
+  repository = "https://fluent.github.io/helm-charts"
+  chart      = "fluentd"
+  namespace  = "kube-system"
+
+  values = [
+    data.template_file.fluend_values.rendered
+  ]
+}
