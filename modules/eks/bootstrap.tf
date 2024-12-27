@@ -64,7 +64,9 @@ EOF
 
 resource "null_resource" "fluentd" {
   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
-
+  triggers = {
+    always = timestamp()
+  }
   provisioner "local-exec" {
     command = <<EOF
 
