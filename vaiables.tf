@@ -6,3 +6,4 @@ variable "def_vpc_cidr" {}
 variable "bastion_host" {}
 variable "hosted_zone_id" {}
 variable "eks" {}
+variable "opensearch" {}

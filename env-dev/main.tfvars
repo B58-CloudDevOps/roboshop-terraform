@@ -105,4 +105,12 @@ eks = {
       }
     }
   }
-} 
+}
+
+
+opensearch = {
+  main = {
+    instance_type  = "r7g.large.search"
+    engine_version = "Elasticsearch_2.17"
+  }
+}

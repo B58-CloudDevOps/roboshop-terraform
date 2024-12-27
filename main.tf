@@ -41,3 +41,12 @@ module "eks" {
   node_groups         = each.value["node_groups"]
   addons              = each.value["addons"]
 }
+
+module "opensearch" {
+  source         = "./modules/opensearch"
+  for_each       = var.opensearch
+  component_name = each.key
+  env            = var.env
+  instance_type  = each.value["instance_type"]
+  engine_version = each.value["engine_version"]
+}
