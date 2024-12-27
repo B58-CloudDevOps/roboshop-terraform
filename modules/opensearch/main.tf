@@ -12,7 +12,7 @@ resource "aws_opensearch_domain" "main" {
     internal_user_database_enabled = true
     master_user_options {
       master_user_name     = data.vault_generic_secret.opensearch.data["MASTER_USERNAME"]
-      master_user_password = data.vault_generic_secret.opensearch.data["MASTER_password"]
+      master_user_password = data.vault_generic_secret.opensearch.data["MASTER_PASSWORD"]
     }
   }
   domain_endpoint_options {
@@ -35,20 +35,5 @@ resource "aws_opensearch_domain" "main" {
 
   tags = {
     Domain = "${var.component_name}-${var.env}"
-  }
-}
-
-data "aws_iam_policy_document" "main" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-
-    actions   = ["es:*"]
-    resources = ["arn:aws:es:us-east-1:${data.aws_caller_identity.current.account_id}:domain/${var.component_name}-${var.env}/*"]
-
   }
 }
