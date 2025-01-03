@@ -88,7 +88,7 @@ resource "null_resource" "argo_cd" {
     command = <<EOF
 aws eks update-kubeconfig --name "${var.env}-eks"
 kubectl create namespace argocd || true
-kubectl apply -f https://raw.githubusercontent.com/B58-CloudDevOps/learn-kubernetes/refs/heads/main/arogCD/argo.yaml -n argocd  --create-namespace
+kubectl apply -f https://raw.githubusercontent.com/B58-CloudDevOps/learn-kubernetes/refs/heads/main/arogCD/argo.yaml -n argocd
 sleep 5
 EOF
   }
