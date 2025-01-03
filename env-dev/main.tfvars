@@ -84,10 +84,10 @@ eks = {
     eks_cluster_version = "1.30" # 1.31 is latest
     node_groups = {
       first = {
-        min_nodes      = 1
+        min_nodes      = 2
         max_nodes      = 3
         capacity_type  = "ON_DEMAND"
-        instance_types = ["t3.medium"]
+        instance_types = ["t3.medium", "t3.large"]
       }
     }
     addons = {
