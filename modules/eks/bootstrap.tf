@@ -55,7 +55,6 @@ resource "null_resource" "hpa_metrics_server" {
 
   provisioner "local-exec" {
     command = <<EOF
-
 aws eks update-kubeconfig --name "${var.env}-eks"
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml --namespace kube-system
 EOF
@@ -79,4 +78,21 @@ resource "helm_release" "fluentd" {
   values = [
     data.template_file.fluend_values.rendered
   ]
+}
+
+# Deploys ArgoCD To Perform Continuous Deployments
+echo "Installing ArgoCD"
+# kubectl create ns argocd || true
+sleep 10
+kubectl apply -f https://raw.githubusercontent.com/B58-CloudDevOps/learn-kubernetes/refs/heads/main/arogCD/argo.yaml -n argocd 
+
+resource "null_resource" "argocd" {
+  depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
+
+  provisioner "local-exec" {
+    command = <<EOF
+aws eks update-kubeconfig --name "${var.env}-eks"
+kubectl apply -f https://raw.githubusercontent.com/B58-CloudDevOps/learn-kubernetes/refs/heads/main/arogCD/argo.yaml -n argocd  --create-namespace
+EOF
+  }
 }

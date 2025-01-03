@@ -16,6 +16,5 @@ data "template_file" "fluend_values" {
     DOMAIN_PASSWORD = data.vault_generic_secret.opensearch.data["MASTER_PASSWORD"]
     env             = var.env
     DOMAIN_URL      = var.opensearch_endpoint
-
   }
 }
