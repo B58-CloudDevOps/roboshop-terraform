@@ -81,15 +81,45 @@ resource "helm_release" "fluentd" {
 }
 
 # Deploys ArgoCD To Perform Continuous Deployments
-resource "null_resource" "argocd" {
-  depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
+# resource "null_resource" "argocd" {
+#   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
 
-  provisioner "local-exec" {
-    command = <<EOF
-aws eks update-kubeconfig --name "${var.env}-eks"
-kubectl create namespace argocd || true
-kubectl apply -f https://raw.githubusercontent.com/B58-CloudDevOps/learn-kubernetes/refs/heads/main/arogCD/argo.yaml -n argocd
-sleep 5
-EOF
+#   provisioner "local-exec" {
+#     command = <<EOF
+# aws eks update-kubeconfig --name "${var.env}-eks"
+# kubectl create namespace argocd || true
+# kubectl apply -f https://raw.githubusercontent.com/B58-CloudDevOps/learn-kubernetes/refs/heads/main/arogCD/argo.yaml -n argocd
+# sleep 5
+# EOF
+#   }
+# }
+
+# Argocd Helm Chart
+resource "helm_release" "argo_cd" {
+depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
+
+  name             = "argocd"
+  repository       = "https://argoproj.github.io/argo-helm"
+  chart            = "argo-cd"
+  namespace        = "argocd"
+  create_namespace = true
+
+  set {
+    name  = "global.domain"
+    value = "argocd-${var.env}.cloudapps.today"
   }
+
+  set {
+    name  = "server.ingress.enabled"
+    value = true
+  }
+
+  set {
+    name  = "server.ingress.ingressClassName"
+    value = "nginx"
+  }
+
+  values = [
+    file("${path.module}/conf/argocd.yaml")
+  ]
 }
