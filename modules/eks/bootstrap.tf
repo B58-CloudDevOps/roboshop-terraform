@@ -81,12 +81,13 @@ resource "helm_release" "fluentd" {
 }
 
 # Deploys ArgoCD To Perform Continuous Deployments
-resource "null_resource" "argocd" {
+resource "null_resource" "argo_cd" {
   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
 
   provisioner "local-exec" {
     command = <<EOF
 aws eks update-kubeconfig --name "${var.env}-eks"
+kubectl create namespace argocd || true
 kubectl apply -f https://raw.githubusercontent.com/B58-CloudDevOps/learn-kubernetes/refs/heads/main/arogCD/argo.yaml -n argocd  --create-namespace
 sleep 5
 EOF
