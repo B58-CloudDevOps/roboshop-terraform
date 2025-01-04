@@ -81,7 +81,7 @@ resource "helm_release" "fluentd" {
 }
 
 # Deploys ArgoCD To Perform Continuous Deployments
-resource "null_resource" "argocd" {
+resource "null_resource" "argo_cd" {
   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
 
   provisioner "local-exec" {
