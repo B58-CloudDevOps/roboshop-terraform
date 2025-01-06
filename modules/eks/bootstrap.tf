@@ -84,9 +84,6 @@ resource "helm_release" "fluentd" {
 resource "null_resource" "argo_cd" {
   depends_on = [aws_eks_cluster.main, aws_eks_node_group.main, null_resource.nginxIngress, null_resource.externalDns]
 
-triggers = always {
-    timestamp = timestamp()
-  }
   provisioner "local-exec" {
     command = <<EOF
 aws eks update-kubeconfig --name "${var.env}-eks"
